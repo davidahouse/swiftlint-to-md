@@ -16,6 +16,16 @@ if (process.argv.length > 3) {
   output = process.argv[3];
 }
 
+let sha = null;
+if (process.argv.length > 4) {
+  sha = process.argv[4];
+}
+
+let repoUrl = null;
+if (process.argv.length > 5) {
+  repoUrl = process.argv[5];
+}
+
 if (output === 'text') {
   outputText();
 } else {
@@ -36,7 +46,14 @@ function outputText() {
   });
 
   Object.keys(files).forEach(function(key) {
-    console.log('### ' + key);
+    if (sha != null && repoUrl != null) {
+      console.log(
+        '### [' + repoUrl + '/blob/' + sha + '/' + key + '](' + key + ')'
+      );
+    } else {
+      console.log('### ' + key);
+    }
+
     console.log(' ');
     console.log('Finding | Line | Description ');
     console.log('------- | ---- | ------------');
@@ -49,8 +66,35 @@ function outputText() {
         output += ':rotating_light: ';
       }
       output += finding.rule_id + ' | ';
-      output += finding.line + ' | ';
-      output += finding.reason;
+      if (sha != null && repoUrl != null) {
+        output +=
+          '[' +
+          repoUrl +
+          '/blob/' +
+          sha +
+          '/' +
+          key +
+          '#L' +
+          finding.line +
+          '](' +
+          finding.line +
+          ') | ';
+        output +=
+          '[' +
+          repoUrl +
+          '/blob/' +
+          sha +
+          '/' +
+          key +
+          '#L' +
+          finding.line +
+          '](' +
+          finding.reason +
+          ') | ';
+      } else {
+        output += finding.line + ' | ';
+        output += finding.reason;
+      }
       console.log(output);
     });
     console.log(' ');
