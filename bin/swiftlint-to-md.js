@@ -48,7 +48,7 @@ function outputText() {
   Object.keys(files).forEach(function(key) {
     if (sha != null && repoUrl != null) {
       console.log(
-        '### [' + repoUrl + '/blob/' + sha + '/' + key + '](' + key + ')'
+        '### [' + key + '](' + repoUrl + '/blob/' + sha + '/' + key + ')'
       );
     } else {
       console.log('### ' + key);
@@ -69,18 +69,20 @@ function outputText() {
       if (sha != null && repoUrl != null) {
         output +=
           '[' +
+          finding.line +
+          '](' +
           repoUrl +
           '/blob/' +
           sha +
           '/' +
           key +
           '#L' +
-          finding.line +
-          '](' +
           finding.line +
           ') | ';
         output +=
           '[' +
+          finding.reason +
+          '](' +
           repoUrl +
           '/blob/' +
           sha +
@@ -88,8 +90,6 @@ function outputText() {
           key +
           '#L' +
           finding.line +
-          '](' +
-          finding.reason +
           ') | ';
       } else {
         output += finding.line + ' | ';
