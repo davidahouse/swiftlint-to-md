@@ -16,12 +16,12 @@
     "figlet": "^1.5.0",
     "line-reader": "^0.4.0",
     "pkginfo": "^0.4.1",
-    "rc": "^1.2.8"
+    "rc-house": "^1.3.0"
   },
   "devDependencies": {
-    "eslint": "^6.5.1",
+    "eslint": "^8.12.0",
     "eslint-config-google": "^0.14.0",
-    "eslint-config-prettier": "^6.5.0"
+    "eslint-config-prettier": "^8.5.0"
   },
   "scripts": {
     "lint": "eslint $(find . -name \"*.js\" -not -path \"./node_modules/*\" -not -path \"./public/*\")",
